@@ -6,7 +6,8 @@ Landing page statis (HTML/CSS/JavaScript tanpa build step).
 - `index.html` — seluruh konten halaman
 - `styles.css` — tema warna navy, emas, dan teal
 - `script.js` — tahun otomatis dan menu mobile
-- `assets/logo.jpg` — logo
+- `assets/logo*.jpg` — logo (asli, 640 px untuk hero, 128 px untuk header)
+- `assets/og-image.jpg` — gambar pratinjau tautan (1200×630); `assets/favicon*`, `assets/apple-touch-icon.png` — ikon
 - `assets/reports/` — PDF (Bedah Koin, Daily Update, laporan riset); `assets/covers/` — sampul untuk daftar di bagian Riset
 
 ## Placeholder yang perlu diisi

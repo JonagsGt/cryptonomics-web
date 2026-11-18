@@ -23,7 +23,11 @@ const links = $$('[data-link]');
 const secIO = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
-    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+    links.forEach(l => {
+      const on = l.getAttribute('href') === '#' + e.target.id;
+      l.classList.toggle('active', on);
+      if (on) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
+    });
   });
 }, { rootMargin: '-45% 0px -50% 0px' });
 $$('main section[id]').forEach(s => secIO.observe(s));

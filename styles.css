@@ -31,6 +31,14 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 .container { width: min(var(--container), 90%); margin-inline: auto; }
 
+/* ---------- AKSESIBILITAS ---------- */
+.skip-link { position: fixed; left: 12px; top: -80px; z-index: 100; padding: .7rem 1.1rem; border-radius: 12px;
+  background: var(--gold); color: var(--navy-950); font-weight: 600; transition: top .3s var(--ease); }
+.skip-link:focus { top: 12px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--teal-soft); outline-offset: 3px; }
+.btn:focus-visible, .tab:focus-visible, .chip-btn:focus-visible { outline-offset: 3px; }
+main:focus { outline: none; }
+
 /* ---------- AMBIENT BACKGROUND ---------- */
 .ambient { position: fixed; inset: 0; z-index: -1; overflow: hidden;
   background: radial-gradient(1200px 700px at 50% -10%, var(--navy-800), var(--navy-950) 70%); }
@@ -250,8 +258,8 @@ button { font: inherit; }
   .nav-toggle { display: flex; }
   .site-nav { position: fixed; inset: 0; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;
     background: rgba(3,10,28,.82); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-    opacity: 0; pointer-events: none; transition: opacity .4s var(--ease); z-index: -1; }
-  .site-nav.open { opacity: 1; pointer-events: auto; }
+    opacity: 0; pointer-events: none; visibility: hidden; transition: opacity .4s var(--ease), visibility 0s linear .4s; z-index: -1; }
+  .site-nav.open { opacity: 1; pointer-events: auto; visibility: visible; transition: opacity .4s var(--ease), visibility 0s; }
   .site-nav a { font-size: 1.4rem; padding: .6rem 1.2rem; }
   .site-header { z-index: 60; }
   /* backdrop-filter pada .nav-wrap membuat menu fixed ikut relatif ke bar.
