@@ -254,10 +254,18 @@ button { font: inherit; }
   .site-nav.open { opacity: 1; pointer-events: auto; }
   .site-nav a { font-size: 1.4rem; padding: .6rem 1.2rem; }
   .site-header { z-index: 60; }
-  /* backdrop-filter pada bar membuat child fixed ikut relatif ke bar; matikan di mobile */
+  /* backdrop-filter pada .nav-wrap membuat menu fixed ikut relatif ke bar.
+     Latar kaca dipindah ke pseudo-element agar menu tetap layar penuh. */
   .nav-wrap { position: relative; backdrop-filter: none; -webkit-backdrop-filter: none;
     background: transparent; border-color: transparent; box-shadow: none; }
   .site-header.scrolled .nav-wrap { background: transparent; }
+  .nav-wrap::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 999px;
+    background: rgba(6,17,48,.72); border: 1px solid var(--glass-edge);
+    backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 16px 36px -18px rgba(0,0,0,.7); }
+  /* tab produk: satu baris penuh agar indikator tidak salah posisi */
+  .tabs { display: flex; width: 100%; flex-wrap: nowrap; }
+  .tab { flex: 1; padding: .7rem .3rem; font-size: .8rem; white-space: nowrap; text-align: center; }
   .site-nav { z-index: -1; }
   .nav-toggle { position: relative; z-index: 2; background: rgba(6,17,48,.6); backdrop-filter: blur(14px); }
   .panel { padding: 1.9rem; }
