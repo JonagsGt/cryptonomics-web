@@ -1,16 +1,123 @@
-// Tahun otomatis di footer
-document.getElementById('year').textContent = new Date().getFullYear();
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = matchMedia('(pointer: fine)').matches;
+
+// Tahun di footer
+$('#year').textContent = new Date().getFullYear();
+
+// Header mengecil saat digulir
+const header = $('#header');
+const onScroll = () => header.classList.toggle('scrolled', scrollY > 40);
+addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// Animasi muncul saat digulir
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+}, { threshold: .15 });
+$$('.reveal').forEach(el => io.observe(el));
+
+// Menandai link navigasi sesuai bagian yang aktif
+const links = $$('[data-link]');
+const secIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+$$('main section[id]').forEach(s => secIO.observe(s));
 
 // Menu mobile
-const toggle = document.querySelector('.nav-toggle');
-const nav = document.getElementById('nav');
-toggle.addEventListener('click', () => {
-  const open = nav.classList.toggle('open');
-  toggle.setAttribute('aria-expanded', String(open));
+const toggle = $('.nav-toggle'), nav = $('#nav');
+const setMenu = open => { nav.classList.toggle('open', open); toggle.setAttribute('aria-expanded', String(open)); toggle.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu'); };
+toggle.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+links.forEach(l => l.addEventListener('click', () => setMenu(false)));
+addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+// Tab produk dengan indikator yang bergeser (mendukung panah keyboard)
+const tabs = $$('.tab'), indicator = $('.tab-indicator');
+function moveIndicator(tab) {
+  indicator.style.width = tab.offsetWidth + 'px';
+  indicator.style.transform = `translateX(${tab.offsetLeft}px)`;
+}
+function selectTab(tab, focus = false) {
+  tabs.forEach(t => {
+    const on = t === tab;
+    t.classList.toggle('is-active', on);
+    t.setAttribute('aria-selected', String(on));
+    t.tabIndex = on ? 0 : -1;
+    const panel = document.getElementById(t.getAttribute('aria-controls'));
+    panel.hidden = !on;
+    panel.classList.remove('is-active');
+    if (on) { void panel.offsetWidth; panel.classList.add('is-active'); }
+  });
+  moveIndicator(tab);
+  if (focus) tab.focus();
+}
+tabs.forEach((t, i) => {
+  t.addEventListener('click', () => selectTab(t));
+  t.addEventListener('keydown', e => {
+    if (!['ArrowRight', 'ArrowLeft'].includes(e.key)) return;
+    e.preventDefault();
+    const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+    selectTab(next, true);
+  });
 });
-nav.querySelectorAll('a').forEach(link =>
-  link.addEventListener('click', () => {
-    nav.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-  })
-);
+moveIndicator(tabs.find(t => t.classList.contains('is-active')));
+addEventListener('resize', () => moveIndicator(tabs.find(t => t.classList.contains('is-active'))));
+document.fonts?.ready.then(() => moveIndicator(tabs.find(t => t.classList.contains('is-active'))));
+
+// Efek kursor: emblem miring, kilau bergerak, orb ikut bergeser, sorotan kartu
+if (finePointer && !reduceMotion) {
+  const emblem = $('#emblem');
+  const gloss = emblem.querySelector('.emblem-gloss');
+  const orbs = $$('.orb');
+  const hero = $('.hero');
+
+  hero.addEventListener('pointermove', e => {
+    const r = emblem.getBoundingClientRect();
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    const dx = (e.clientX - cx) / (r.width / 2), dy = (e.clientY - cy) / (r.height / 2);
+    emblem.style.setProperty('--ry', (dx * 14).toFixed(2) + 'deg');
+    emblem.style.setProperty('--rx', (-dy * 14).toFixed(2) + 'deg');
+    gloss.style.setProperty('--gx', (50 + dx * 40).toFixed(1) + '%');
+  });
+  hero.addEventListener('pointerleave', () => {
+    emblem.style.setProperty('--rx', '0deg');
+    emblem.style.setProperty('--ry', '0deg');
+  });
+
+  addEventListener('pointermove', e => {
+    const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+    orbs.forEach((o, i) => {
+      const k = (i + 1) * 40;
+      o.style.setProperty('--px', (x * k).toFixed(1) + 'px');
+      o.style.setProperty('--py', (y * k).toFixed(1) + 'px');
+    });
+  }, { passive: true });
+
+  $$('[data-spot]').forEach(card => card.addEventListener('pointermove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
+
+  // Tombol magnetis
+  $$('[data-magnetic]').forEach(btn => {
+    btn.addEventListener('pointermove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * .25, y = (e.clientY - r.top - r.height / 2) * .35;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('pointerleave', () => btn.style.transform = '');
+  });
+}
+
+// Kilau emblem saat halaman dibuka (tanpa kursor)
+if (!reduceMotion) {
+  const g = $('#emblem .emblem-gloss');
+  let t = 0;
+  const sweep = () => { t += .006; g.style.setProperty('--gx', (120 - (t % 1) * 240) + '%'); if (t < 1.2) requestAnimationFrame(sweep); };
+  setTimeout(() => requestAnimationFrame(sweep), 600);
+}

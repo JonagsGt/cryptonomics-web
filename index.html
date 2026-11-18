@@ -10,21 +10,28 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container nav-wrap">
+  <!-- Latar ambient yang bergerak mengikuti kursor -->
+  <div class="ambient" aria-hidden="true">
+    <span class="orb orb-gold"></span>
+    <span class="orb orb-teal"></span>
+    <span class="grain"></span>
+  </div>
+
+  <header class="site-header" id="header">
+    <div class="container nav-wrap glass-bar">
       <a href="#top" class="brand">
         <img src="assets/logo.jpg" alt="Logo Cryptonomics" class="brand-logo">
         <span>Cryptonomics</span>
       </a>
-      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false" aria-controls="nav">
-        <span></span><span></span><span></span>
-      </button>
       <nav id="nav" class="site-nav">
-        <a href="#tentang">Tentang</a>
-        <a href="#produk">Produk</a>
-        <a href="#sampel">Sampel</a>
-        <a href="#kontak">Kontak</a>
+        <a href="#tentang" data-link>Tentang</a>
+        <a href="#produk" data-link>Produk</a>
+        <a href="#sampel" data-link>Sampel</a>
+        <a href="#kontak" data-link>Kontak</a>
       </nav>
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -33,64 +40,90 @@
     <!-- HERO -->
     <section class="hero">
       <div class="container hero-grid">
-        <div class="hero-text">
+        <div class="hero-text reveal">
           <p class="eyebrow">Riset &amp; Intelijen Kripto dan Makro</p>
-          <h1>Cryptonomics <span class="accent">—</span> Research. Intelligence. Perspective.</h1>
+          <h1>Cryptonomics<span class="dash">.</span><br>
+            <span class="h1-sub">Research. Intelligence. Perspective.</span></h1>
           <p class="lead">
             Riset independen dan intelijen harian tentang kebijakan Indonesia, makro global,
             pasar, kripto, serta teknologi dan AI.
           </p>
           <div class="cta-row">
-            <!-- PLACEHOLDER: ganti href dengan link channel Telegram resmi -->
-            <a href="#produk" class="btn btn-primary">Lihat Produk</a>
-            <a href="#sampel" class="btn btn-ghost">Lihat Sampel Laporan</a>
+            <a href="#produk" class="btn btn-primary" data-magnetic>Lihat Produk</a>
+            <a href="#sampel" class="btn btn-glass" data-magnetic>Lihat Sampel</a>
           </div>
         </div>
-        <div class="hero-visual">
-          <img src="assets/logo.jpg" alt="Ilustrasi logo Cryptonomics">
+
+        <div class="hero-visual reveal" style="--d:.15s">
+          <div class="glass-emblem" id="emblem">
+            <div class="emblem-core">
+              <img src="assets/logo.jpg" alt="Emblem Cryptonomics">
+            </div>
+            <span class="emblem-gloss" aria-hidden="true"></span>
+          </div>
+          <p class="emblem-hint">Gerakkan kursor untuk melihat kedalaman</p>
         </div>
       </div>
+      <a href="#tentang" class="scroll-cue" aria-label="Gulir ke bawah"><span></span></a>
     </section>
 
     <!-- TENTANG -->
     <section id="tentang" class="section">
       <div class="container">
-        <h2 class="section-title">Tentang Cryptonomics</h2>
-        <p class="section-lead">
-          Cryptonomics adalah usaha riset dan intelijen yang menyajikan analisis independen
-          tentang kebijakan Indonesia, kondisi makro global, pasar, aset kripto, serta
-          perkembangan teknologi dan AI. Kami fokus pada ringkas, jelas, dan dapat ditelusuri.
-        </p>
-        <!-- PLACEHOLDER: tambahkan visi/misi atau pendekatan riset jika sudah ada -->
+        <div class="section-head reveal">
+          <p class="eyebrow">Tentang</p>
+          <h2 class="section-title">Analisis independen, ringkas, dan dapat ditelusuri.</h2>
+        </div>
+        <div class="about-grid">
+          <p class="about-text reveal">
+            Cryptonomics adalah usaha riset dan intelijen yang menyajikan analisis independen
+            tentang kebijakan Indonesia, kondisi makro global, pasar, aset kripto, serta
+            perkembangan teknologi dan AI.
+          </p>
+          <ul class="pillars">
+            <li class="glass-card reveal" data-spot><span class="pillar-n">01</span><h3>Independen</h3><p>Analisis disusun tanpa agenda pihak mana pun.</p></li>
+            <li class="glass-card reveal" data-spot style="--d:.1s"><span class="pillar-n">02</span><h3>Ringkas</h3><p>Intelijen harian yang bisa dibaca dalam hitungan menit.</p></li>
+            <li class="glass-card reveal" data-spot style="--d:.2s"><span class="pillar-n">03</span><h3>Dapat ditelusuri</h3><p>Setiap kajian menjelaskan metodologinya.</p></li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- PRODUK -->
-    <section id="produk" class="section section-alt">
+    <section id="produk" class="section">
       <div class="container">
-        <h2 class="section-title">Produk</h2>
-        <p class="section-lead">Tiga produk riset kami saat ini.</p>
+        <div class="section-head reveal">
+          <p class="eyebrow">Produk</p>
+          <h2 class="section-title">Tiga cara membaca pasar dan kebijakan.</h2>
+        </div>
 
-        <div class="card-grid">
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">◐</div>
+        <div class="tabs reveal" role="tablist" aria-label="Produk Cryptonomics">
+          <button class="tab is-active" role="tab" aria-selected="true" aria-controls="p-daily" id="t-daily" data-tab="daily">Daily Update</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="p-koin" id="t-koin" tabindex="-1" data-tab="koin">Bedah Koin</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="p-laporan" id="t-laporan" tabindex="-1" data-tab="laporan">Laporan Riset</button>
+          <span class="tab-indicator" aria-hidden="true"></span>
+        </div>
+
+        <div class="panels">
+          <article class="panel glass-card is-active" role="tabpanel" id="p-daily" aria-labelledby="t-daily" data-panel="daily">
+            <div class="panel-badge">Harian</div>
             <h3>Cryptonomics Daily Intelligence Update</h3>
             <p>Ringkasan intelijen harian dalam format PDF, dibagikan melalui Telegram. Mencakup kebijakan Indonesia, makro global, pasar, kripto, serta teknologi dan AI.</p>
-            <span class="tag">Harian</span>
+            <ul class="chips"><li>Kebijakan Indonesia</li><li>Makro global</li><li>Pasar</li><li>Kripto</li><li>Teknologi &amp; AI</li></ul>
           </article>
 
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">◆</div>
+          <article class="panel glass-card" role="tabpanel" id="p-koin" aria-labelledby="t-koin" data-panel="koin" hidden>
+            <div class="panel-badge">Per koin</div>
             <h3>Bedah Koin</h3>
-            <p>Kajian mendalam atas satu koin, dengan metodologi <strong>Skor Cryptonomics</strong>. Penilaian ditampilkan sebagai ringkasan; detail metodologi tidak diubah tanpa persetujuan.</p>
-            <span class="tag">Per koin</span>
+            <p>Kajian mendalam atas satu koin dengan metodologi <strong>Skor Cryptonomics</strong>. Penilaian ditampilkan sebagai ringkasan; detail metodologi tidak diubah tanpa persetujuan.</p>
+            <ul class="chips"><li>Satu koin per kajian</li><li>Skor ringkasan</li><li>Metodologi terbuka</li></ul>
           </article>
 
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">▣</div>
+          <article class="panel glass-card" role="tabpanel" id="p-laporan" aria-labelledby="t-laporan" data-panel="laporan" hidden>
+            <div class="panel-badge">Per laporan &amp; B2B</div>
             <h3>Laporan Riset</h3>
             <p>Laporan riset tematik yang lebih panjang, tersedia untuk pembelian per laporan dan untuk kerja sama B2B.</p>
-            <span class="tag">Per laporan &amp; B2B</span>
+            <ul class="chips"><li>Pembelian per laporan</li><li>Kerja sama B2B</li></ul>
           </article>
         </div>
       </div>
@@ -99,26 +132,30 @@
     <!-- SAMPEL -->
     <section id="sampel" class="section">
       <div class="container">
-        <h2 class="section-title">Sampel Laporan</h2>
-        <p class="section-lead">Contoh format laporan kami.</p>
-        <div class="placeholder-box">
+        <div class="section-head reveal">
+          <p class="eyebrow">Sampel</p>
+          <h2 class="section-title">Lihat format laporan kami.</h2>
+        </div>
+        <div class="glass-card placeholder-box reveal">
           <!-- PLACEHOLDER: ganti dengan tautan PDF sampel setelah tersedia -->
+          <span class="ph-icon" aria-hidden="true">▤</span>
           <p><strong>[PLACEHOLDER]</strong> Sampel laporan akan segera tersedia.</p>
         </div>
       </div>
     </section>
 
     <!-- KONTAK -->
-    <section id="kontak" class="section section-alt">
+    <section id="kontak" class="section">
       <div class="container contact-wrap">
-        <div>
-          <h2 class="section-title">Kontak</h2>
+        <div class="reveal">
+          <p class="eyebrow">Kontak</p>
+          <h2 class="section-title">Mari berdiskusi.</h2>
           <p class="section-lead">Untuk pertanyaan, kerja sama B2B, atau pemesanan laporan.</p>
         </div>
-        <ul class="contact-list">
+        <ul class="contact-list reveal" style="--d:.1s">
           <!-- PLACEHOLDER: ganti dengan email dan link Telegram resmi -->
-          <li><span>Email</span> <strong>[PLACEHOLDER: email]</strong></li>
-          <li><span>Telegram</span> <strong>[PLACEHOLDER: link Telegram]</strong></li>
+          <li class="glass-card" data-spot><span>Email</span><strong>[PLACEHOLDER: email]</strong></li>
+          <li class="glass-card" data-spot><span>Telegram</span><strong>[PLACEHOLDER: link Telegram]</strong></li>
         </ul>
       </div>
     </section>
