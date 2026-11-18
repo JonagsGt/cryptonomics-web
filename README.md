@@ -7,7 +7,7 @@ Landing page statis (HTML/CSS/JavaScript tanpa build step).
 - `styles.css` — tema warna navy, emas, dan teal
 - `script.js` — tahun otomatis dan menu mobile
 - `assets/logo.jpg` — logo
-- `assets/reports/` — PDF laporan riset; `assets/report-cover.jpg` — sampul untuk kartu laporan
+- `assets/reports/` — PDF (Bedah Koin, Daily Update, laporan riset); `assets/covers/` — sampul untuk daftar di bagian Riset
 
 ## Placeholder yang perlu diisi
 Kontak (Telegram, TikTok, Instagram) sudah terisi. Belum ada email kontak.

@@ -166,17 +166,31 @@ button { font: inherit; }
 .ph-icon { display: block; font-size: 2rem; color: var(--teal-soft); margin-bottom: .8rem; }
 .placeholder-box strong { color: var(--gold-soft); }
 
-/* SAMPEL: kartu laporan */
-.report-card { display: grid; grid-template-columns: 240px 1fr; gap: 2.2rem; padding: 1.8rem; border-radius: 28px; align-items: center; }
-.report-cover { display: block; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 50px -16px rgba(0,0,0,.7), 0 0 0 1px var(--glass-edge);
-  transition: transform .6s var(--ease), box-shadow .6s var(--ease); }
-.report-cover:hover { transform: translateY(-6px) rotate(-1deg) scale(1.02); }
-.report-cover img { width: 100%; height: auto; }
-.report-meta { color: var(--teal-soft); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; margin-bottom: .7rem; }
-.report-body h3 { font-size: clamp(1.3rem, 2.4vw, 1.75rem); line-height: 1.25; letter-spacing: -.01em; font-weight: 650; margin-bottom: .8rem; }
-.report-desc { color: var(--text-muted); max-width: 40rem; }
-.report-body .cta-row { margin-top: 1.5rem; }
-.report-note { color: var(--text-muted); font-size: .8rem; margin-top: 1.1rem; opacity: .8; }
+/* PERPUSTAKAAN RISET */
+.lib-filters { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.6rem; }
+.chip-btn { background: var(--glass-fill); border: 1px solid var(--glass-edge); color: var(--text-muted); padding: .5rem 1.1rem; border-radius: 999px;
+  cursor: pointer; font-size: .88rem; transition: color .3s, background .3s, border-color .3s, transform .3s var(--ease); }
+.chip-btn:hover { color: var(--text); transform: translateY(-1px); }
+.chip-btn.is-active { color: var(--navy-950); background: linear-gradient(135deg, var(--gold-soft), var(--gold)); border-color: transparent; font-weight: 600; }
+.lib-list { display: grid; gap: 1.2rem; }
+.lib-item { display: grid; grid-template-columns: 150px 1fr; gap: 1.8rem; padding: 1.4rem; border-radius: 24px; align-items: center; }
+.lib-item[hidden] { display: none; }
+.lib-item.is-entering { animation: panelIn .6s var(--ease); }
+.lib-cover { display: block; border-radius: 12px; overflow: hidden; box-shadow: 0 18px 40px -14px rgba(0,0,0,.7), 0 0 0 1px var(--glass-edge);
+  transition: transform .6s var(--ease); }
+.lib-cover:hover { transform: translateY(-5px) rotate(-1deg) scale(1.03); }
+.lib-cover img { width: 100%; height: auto; }
+.lib-meta { color: var(--text-muted); font-size: .8rem; letter-spacing: .04em; margin-bottom: .6rem; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+.lib-type { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; padding: .25rem .7rem; border-radius: 999px; color: var(--navy-950); }
+.lib-type-koin { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); }
+.lib-type-daily { background: linear-gradient(135deg, var(--teal-soft), var(--teal)); }
+.lib-type-riset { background: linear-gradient(135deg, #cfd9f2, #93a9de); }
+.lib-body h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); line-height: 1.3; letter-spacing: -.01em; font-weight: 650; margin-bottom: .6rem; }
+.lib-desc { color: var(--text-muted); font-size: .95rem; max-width: 42rem; }
+.lib-body .chips { margin-top: 1rem; }
+.lib-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.2rem; }
+.btn-sm { padding: .6rem 1.2rem; font-size: .88rem; }
+.lib-note { color: var(--text-muted); font-size: .82rem; margin-top: 1.2rem; opacity: .85; }
 
 /* Perpustakaan: catatan berikutnya */
 .library-next { margin-top: 1.4rem; border-radius: 20px; padding: 1.4rem 1.8rem; display: flex; align-items: center; gap: 1.1rem; border-style: dashed; color: var(--text-muted); }
@@ -223,8 +237,7 @@ button { font: inherit; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 900px) {
-  .report-card { grid-template-columns: 1fr; }
-  .report-cover { max-width: 240px; }
+  .lib-item { grid-template-columns: 110px 1fr; gap: 1.2rem; }
   .hero-grid, .about-grid, .contact-wrap { grid-template-columns: 1fr; }
   .hero { min-height: auto; padding: 130px 0 90px; }
   .hero-visual { order: -1; }
@@ -232,6 +245,8 @@ button { font: inherit; }
   .section { padding: 84px 0; }
 }
 @media (max-width: 720px) {
+  .lib-item { grid-template-columns: 1fr; }
+  .lib-cover { max-width: 160px; }
   .nav-toggle { display: flex; }
   .site-nav { position: fixed; inset: 0; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;
     background: rgba(3,10,28,.82); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);

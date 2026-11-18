@@ -131,3 +131,21 @@ const faqItems = $$('.faq-item');
 faqItems.forEach(item => item.addEventListener('toggle', () => {
   if (item.open) faqItems.forEach(o => { if (o !== item) o.open = false; });
 }));
+
+// Perpustakaan riset: filter jenis materi
+const filterBtns = $$('.chip-btn');
+const libItems = $$('.lib-item');
+filterBtns.forEach(btn => btn.addEventListener('click', () => {
+  const f = btn.dataset.filter;
+  filterBtns.forEach(b => {
+    const on = b === btn;
+    b.classList.toggle('is-active', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  libItems.forEach(it => {
+    const show = f === 'all' || it.dataset.type === f;
+    it.hidden = !show;
+    it.classList.remove('is-entering');
+    if (show) { void it.offsetWidth; it.classList.add('is-entering'); }
+  });
+}));
