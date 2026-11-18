@@ -11,7 +11,9 @@ Landing page statis (HTML/CSS/JavaScript tanpa build step).
 ## Placeholder yang perlu diisi
 Cari `PLACEHOLDER` di `index.html`:
 - Link Telegram resmi
-- Email kontak
+- Link TikTok resmi
+- Link Instagram resmi
+(Belum ada email kontak; tambahkan kembali jika sudah tersedia.)
 - Tautan PDF sampel laporan
 - Visi/misi atau pendekatan riset (opsional)
 
