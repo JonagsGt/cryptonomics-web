@@ -9,11 +9,9 @@ Landing page statis (HTML/CSS/JavaScript tanpa build step).
 - `assets/logo.jpg` — logo
 
 ## Placeholder yang perlu diisi
+Kontak (Telegram, TikTok, Instagram) sudah terisi. Belum ada email kontak.
+
 Cari `PLACEHOLDER` di `index.html`:
-- Link Telegram resmi
-- Link TikTok resmi
-- Link Instagram resmi
-(Belum ada email kontak; tambahkan kembali jika sudah tersedia.)
 - Tautan PDF sampel laporan
 - Visi/misi atau pendekatan riset (opsional)
 
