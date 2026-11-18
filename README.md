@@ -7,12 +7,12 @@ Landing page statis (HTML/CSS/JavaScript tanpa build step).
 - `styles.css` — tema warna navy, emas, dan teal
 - `script.js` — tahun otomatis dan menu mobile
 - `assets/logo.jpg` — logo
+- `assets/reports/` — PDF laporan riset; `assets/report-cover.jpg` — sampul untuk kartu laporan
 
 ## Placeholder yang perlu diisi
 Kontak (Telegram, TikTok, Instagram) sudah terisi. Belum ada email kontak.
 
 Cari `PLACEHOLDER` di `index.html`:
-- Tautan PDF sampel laporan
 - Visi/misi atau pendekatan riset (opsional)
 
 ## Menjalankan lokal

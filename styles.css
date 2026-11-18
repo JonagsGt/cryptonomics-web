@@ -166,6 +166,18 @@ button { font: inherit; }
 .ph-icon { display: block; font-size: 2rem; color: var(--teal-soft); margin-bottom: .8rem; }
 .placeholder-box strong { color: var(--gold-soft); }
 
+/* SAMPEL: kartu laporan */
+.report-card { display: grid; grid-template-columns: 240px 1fr; gap: 2.2rem; padding: 1.8rem; border-radius: 28px; align-items: center; }
+.report-cover { display: block; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 50px -16px rgba(0,0,0,.7), 0 0 0 1px var(--glass-edge);
+  transition: transform .6s var(--ease), box-shadow .6s var(--ease); }
+.report-cover:hover { transform: translateY(-6px) rotate(-1deg) scale(1.02); }
+.report-cover img { width: 100%; height: auto; }
+.report-meta { color: var(--teal-soft); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; margin-bottom: .7rem; }
+.report-body h3 { font-size: clamp(1.3rem, 2.4vw, 1.75rem); line-height: 1.25; letter-spacing: -.01em; font-weight: 650; margin-bottom: .8rem; }
+.report-desc { color: var(--text-muted); max-width: 40rem; }
+.report-body .cta-row { margin-top: 1.5rem; }
+.report-note { color: var(--text-muted); font-size: .8rem; margin-top: 1.1rem; opacity: .8; }
+
 /* KONTAK */
 .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
 .contact-wrap .section-lead { margin-top: .9rem; }
@@ -191,6 +203,8 @@ button { font: inherit; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 900px) {
+  .report-card { grid-template-columns: 1fr; }
+  .report-cover { max-width: 240px; }
   .hero-grid, .about-grid, .contact-wrap { grid-template-columns: 1fr; }
   .hero { min-height: auto; padding: 130px 0 90px; }
   .hero-visual { order: -1; }
