@@ -75,10 +75,14 @@ if (finePointer && !reduceMotion) {
   const orbs = $$('.orb');
   const hero = $('.hero');
 
+  const stage = emblem.parentElement; // pembungkus yang tidak ikut berputar
+  const clamp = v => Math.max(-1, Math.min(1, v));
   hero.addEventListener('pointermove', e => {
-    const r = emblem.getBoundingClientRect();
-    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-    const dx = (e.clientX - cx) / (r.width / 2), dy = (e.clientY - cy) / (r.height / 2);
+    const r = stage.getBoundingClientRect();
+    const half = emblem.offsetWidth / 2;
+    const cx = r.left + r.width / 2;
+    const cy = r.top + emblem.offsetTop - stage.offsetTop + emblem.offsetHeight / 2;
+    const dx = clamp((e.clientX - cx) / half), dy = clamp((e.clientY - cy) / half);
     emblem.style.setProperty('--ry', (dx * 14).toFixed(2) + 'deg');
     emblem.style.setProperty('--rx', (-dy * 14).toFixed(2) + 'deg');
     gloss.style.setProperty('--gx', (50 + dx * 40).toFixed(1) + '%');
@@ -121,3 +125,9 @@ if (!reduceMotion) {
   const sweep = () => { t += .006; g.style.setProperty('--gx', (120 - (t % 1) * 240) + '%'); if (t < 1.2) requestAnimationFrame(sweep); };
   setTimeout(() => requestAnimationFrame(sweep), 600);
 }
+
+// FAQ: hanya satu pertanyaan terbuka
+const faqItems = $$('.faq-item');
+faqItems.forEach(item => item.addEventListener('toggle', () => {
+  if (item.open) faqItems.forEach(o => { if (o !== item) o.open = false; });
+}));
